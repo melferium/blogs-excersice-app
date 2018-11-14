@@ -1,5 +1,11 @@
+<% if @article.errors.any? %> 
+<ul>
+<% @article.errors.full_messages.each do | msg | %>
+<li> <%= msg %></li>
+<% end %>
+</ul>
+<% end %>
 
-<p>
 <%= form_for @article do |f| %>
 <%= f.label :title %> <br/>
 <%= f.text_field :title%>
