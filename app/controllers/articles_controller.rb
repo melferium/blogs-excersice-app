@@ -20,6 +20,13 @@ class ArticlesController < ApplicationController
   end
 
   def update
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
+      flash[:notice] = "Successfully updated article"
+      redirect_to articles_path
+    else
+      render 'edit'
+    end
 
   end
 
