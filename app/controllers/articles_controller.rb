@@ -23,11 +23,7 @@ class ArticlesController < ApplicationController
   end
 
   def show
-<<<<<<< HEAD
     @article = Article.find(params[:id])
-=======
-    @articles = Article.all
->>>>>>> cf9400abfc60e28f41b625f755aadd6e02533abe
 
   end
 
