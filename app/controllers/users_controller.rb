@@ -66,7 +66,7 @@ class UsersController < ApplicationController
 
   end
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:username, :email, :password, :subdomain)
   end
   def require_same_user
     if current_user != @user && !current_user.admin?
