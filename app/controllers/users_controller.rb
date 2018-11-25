@@ -10,8 +10,9 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
+      Apartment::Tenant.create(@user.subdomain)
       flash[:success] = "Welcome to blogs #{@user.username}"
-      redirect_to user_path(@user)
+      redirect_to root_path
     else
       render 'new'
     end
@@ -27,7 +28,7 @@ class UsersController < ApplicationController
     
     if @user.update(user_params)
       flash[:success] = "Your account was successfully updated"
-      redirect_to articles_path
+      redirect_to root_path
     else
       render 'edit'
     end
@@ -46,9 +47,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    Apartment::Tenant.drop(@user.subdomain)
     @user.destroy
     flash[:danger] = "User and all articles create by user have been deleted"
-    redirect_to users_path
+    redirect_to root_path
 
   end
 

@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def home
-    redirect_to articles_path if logged_in?
+    #redirect_to root_url(subdomain: "#{Apartment::Tenant.current}") if logged_in?
   end
 
 

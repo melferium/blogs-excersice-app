@@ -10,8 +10,10 @@ class SessionsController < ApplicationController
 
     if user && user.authenticate(params[:session][:password])
       session[:user_id] = user.id
+      Apartment::Tenant.switch!(user.subdomain)
       flash[:success] = "Successfully login"
-      redirect_to user_path(user)
+      #redirect_to root_path
+      redirect_to root_url(subdomain: "#{Apartment::Tenant.current}")
     else
       flash.now[:danger] = "Incorrect password / username"
       render 'new'
@@ -21,8 +23,9 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
+    Apartment::Tenant.reset
     flash[:success] = "You have logged out"
-    redirect_to root_path
+    redirect_to logout_path
 
   end
 
