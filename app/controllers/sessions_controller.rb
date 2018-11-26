@@ -13,7 +13,7 @@ class SessionsController < ApplicationController
       Apartment::Tenant.switch!(user.subdomain)
       flash[:success] = "Successfully login"
       #redirect_to root_path
-      redirect_to root_url(subdomain: "#{Apartment::Tenant.current}")
+      redirect_to articles_url(subdomain: current_user.subdomain)
     else
       flash.now[:danger] = "Incorrect password / username"
       render 'new'
