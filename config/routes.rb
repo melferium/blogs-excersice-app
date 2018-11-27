@@ -10,7 +10,6 @@ Rails.application.routes.draw do
   
   constraints SubdomainConstraints do 
     resources :articles
-    delete 'logout', to: 'sessions#destroy'
     
   end
   
