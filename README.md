@@ -1,3 +1,3 @@
 # README
 
-Clone of blogs examplete with Apartment Gems installed
+Clone of blogs examples with Apartment Gems installed
