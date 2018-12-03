@@ -9,12 +9,22 @@
           <%= f.text_field :username, class: "form-control", placeholder: "Enter username", autofocus: true %>
         </div>
       </div>
+      <% if @user.new_record? %>
       <div class='form-group'>
         <%= f.label :subdomain, class: "control-label col-sm-2" %>
         <div class='col-sm-8'>
           <%= f.text_field :subdomain, class: "form-control", placeholder: "Enter subdomain", autofocus: true %>
         </div>
       </div>
+      <% end %>
+      <% if !@user.new_record? %>
+      <div class='form-group'>
+        <%= f.label :domain, class: "control-label col-sm-2" %>
+        <div class='col-sm-8'>
+          <%= f.text_field :domain, class: "form-control", placeholder: "Enter Domain", autofocus: true %>
+        </div>
+      </div>
+      <% end %>
       <div class='form-group'>
         <%= f.label :email, class: "control-label col-sm-2"%>
         <div class='col-sm-8'>

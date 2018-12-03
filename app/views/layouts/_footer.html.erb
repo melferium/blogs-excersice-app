@@ -1,18 +1,21 @@
 <div class="container">
 
  <br/>
-    <% session.each do | name, msg | %>
+<% session.each do | name, msg | %>
       <ul>
         
-        <li><%= name %></li>
-        <li><%= msg %> </li>
+        <li><%= name %> - <%= msg %> </li>
+        
         
       </ul>
       <% end %>
   <footer class="footer">
     <small>
-      Copyright &copy; Melferium
-
+        <p>request domain: <%= request.domain %> </p>
+        <p>request host: <%= request.host %> </p>
+        <p>request subdomain: <%= request.subdomain %> </p>
+        <p>current tenant: <%= Apartment::Tenant.current %> </p>
+    
     </small>
    
 

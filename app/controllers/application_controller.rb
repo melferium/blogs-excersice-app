@@ -1,12 +1,30 @@
 class ApplicationController < ActionController::Base
-  #before_action :redirect_to_subdomain
+  before_action :redirect_to_subdomain
+  before_action :redirect_to_root_if_not_logged_in
+  before_action :switch_tenant_base_on_domain
   helper_method :current_user, :logged_in?, :user_subdomain
 
+  def redirect_to_root_if_not_logged_in
+    return if !request.subdomain.present?
+    if !current_user.present?
+      redirect_to root_url(subdomain: '')
+    end
+
+  end
+
   def redirect_to_subdomain # redirects to subdomain on signup
-    return if !current_user.present?
+    return if !request.subdomain.present?
     if current_user.present? && request.subdomain != current_user.subdomain
       redirect_to root_url(subdomain: current_user.subdomain)
     end
+  end
+
+  def switch_tenant_base_on_domain
+    return if request.subdomain.present?
+    if current_user.present? && request.domain == current_user.domain
+      Apartment::Tenant.switch!(current_user.subdomain)
+    end
+
   end
 
 
@@ -20,7 +38,7 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in?
-    !!current_user
+    current_user.present?
   end
 
   def require_user
