@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: blogsapp
+  database: blogs_production
   username: blogs
-  password: <%= ENV['POSTGRESQLAPP_DATABASE_PASSWORD'] %>
+  password: <%= ENV['TESTAPP_DATABASE_PASSWORD'] %>
