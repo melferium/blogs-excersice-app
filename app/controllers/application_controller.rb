@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
 
   end
 
-  def redirect_to_subdomain # redirects to subdomain on signup
+  def redirect_to_subdomain 
     return if !request.subdomain.present?
     if current_user.present? && request.subdomain != current_user.subdomain
       redirect_to root_url(subdomain: current_user.subdomain)

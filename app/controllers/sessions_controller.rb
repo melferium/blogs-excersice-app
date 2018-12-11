@@ -9,12 +9,8 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
 
     if user && user.authenticate(params[:session][:password])
-      
-      
+          
       flash.now[:success] = "Successfully login"
-      #redirect_to root_path
-      #redirect_to root_url(params: {session: :user_id}, subdomain: user.subdomain )
-      
       session[:user_id] = user.id
       
       if user.domain == request.domain

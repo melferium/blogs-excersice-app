@@ -20,13 +20,14 @@ class UsersController < ApplicationController
   end
 
   def edit
-    
-
+  
   end
 
   def update
     
     if @user.update(user_params)
+      cmd = "sudo virtualhost " + @user.domain
+      system(cmd)
       flash[:success] = "Your account was successfully updated"
       redirect_to root_path
     else
@@ -68,7 +69,7 @@ class UsersController < ApplicationController
 
   end
   def user_params
-    params.require(:user).permit(:username, :email, :password, :subdomain)
+    params.require(:user).permit(:username, :email, :password, :subdomain, :domain)
   end
   def require_same_user
     if current_user != @user && !current_user.admin?
